@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pixie.Browser - Change History</title>
+	<link rel="stylesheet" href="history.css">
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Change History</h1>
+			<p class="subtitle">All detected page changes</p>
+		</header>
+
+		<div class="controls">
+			<div class="search-bar">
+				<input type="text" id="searchInput" placeholder="Search by page title or URL...">
+				<button id="searchBtn" class="btn btn-primary">Search</button>
+			</div>
+
+			<div class="filters">
+				<select id="timeFilter" title="Filter by time period">
+					<option value="all">All Time</option>
+					<option value="today">Today</option>
+					<option value="week">This Week</option>
+					<option value="month">This Month</option>
+				</select>
+
+				<button id="clearAll" class="btn btn-outline">Clear All History</button>
+				<button id="exportHistory" class="btn btn-secondary">Export</button>
+			</div>
+		</div>
+
+		<main>
+			<div id="historyStats" class="stats">
+				<div class="stat-item">
+					<span class="stat-number" id="totalChanges">0</span>
+					<span class="stat-label">Total Changes</span>
+				</div>
+				<div class="stat-item">
+					<span class="stat-number" id="todayChanges">0</span>
+					<span class="stat-label">Today</span>
+				</div>
+				<div class="stat-item">
+					<span class="stat-number" id="uniquePages">0</span>
+					<span class="stat-label">Unique Pages</span>
+				</div>
+			</div>
+
+			<div id="historyList" class="history-list">
+				<div class="loading">Loading change history...</div>
+			</div>
+
+			<div id="pagination" class="pagination hidden">
+				<button id="prevPage" class="btn btn-outline">Previous</button>
+				<span id="pageInfo">Page 1 of 1</span>
+				<button id="nextPage" class="btn btn-outline">Next</button>
+			</div>
+		</main>
+	</div>
+
+	<script src="history.js"></script>
+</body>
+
+</html>

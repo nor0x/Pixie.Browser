@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pixie.Browser Options</title>
+	<link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Pixie.Browser Settings</h1>
+			<p class="subtitle">Configure your page monitoring preferences</p>
+		</header>
+
+		<main>
+			<section class="settings-section">
+				<h2>Monitoring Settings</h2>
+
+				<div class="setting-item">
+					<label for="checkInterval">Check Interval (minutes)</label>
+					<select id="checkInterval">
+						<option value="1">1 minute</option>
+						<option value="5" selected>5 minutes</option>
+						<option value="10">10 minutes</option>
+						<option value="15">15 minutes</option>
+						<option value="30">30 minutes</option>
+						<option value="60">1 hour</option>
+					</select>
+					<p class="setting-description">How often to check for changes on monitored pages</p>
+				</div>
+
+				<div class="setting-item">
+					<label for="sensitivity">Change Sensitivity</label>
+					<select id="sensitivity">
+						<option value="low">Low - Major changes only</option>
+						<option value="medium" selected>Medium - Noticeable changes</option>
+						<option value="high">High - Any pixel difference</option>
+					</select>
+					<p class="setting-description">How sensitive the change detection should be</p>
+				</div>
+
+				<div class="setting-item">
+					<label class="checkbox-label">
+						<input type="checkbox" id="enableNotifications" checked>
+						<span class="checkmark"></span>
+						Enable desktop notifications
+					</label>
+					<p class="setting-description">Show notifications when changes are detected</p>
+				</div>
+
+				<div class="setting-item">
+					<label class="checkbox-label">
+						<input type="checkbox" id="enableSound">
+						<span class="checkmark"></span>
+						Play notification sound
+					</label>
+					<p class="setting-description">Play a sound with notifications</p>
+				</div>
+			</section>
+
+			<section class="settings-section">
+				<h2>Storage Settings</h2>
+
+				<div class="setting-item">
+					<label for="maxHistory">Maximum History Entries</label>
+					<select id="maxHistory">
+						<option value="50">50 entries</option>
+						<option value="100" selected>100 entries</option>
+						<option value="200">200 entries</option>
+						<option value="500">500 entries</option>
+					</select>
+					<p class="setting-description">Maximum number of change events to keep in history</p>
+				</div>
+
+				<div class="setting-item">
+					<label for="maxSnapshots">Maximum Snapshots per Tab</label>
+					<select id="maxSnapshots">
+						<option value="5">5 snapshots</option>
+						<option value="10" selected>10 snapshots</option>
+						<option value="20">20 snapshots</option>
+						<option value="50">50 snapshots</option>
+					</select>
+					<p class="setting-description">Maximum number of snapshots to keep for each monitored tab</p>
+				</div>
+			</section>
+
+			<section class="settings-section">
+				<h2>Advanced Settings</h2>
+
+				<div class="setting-item">
+					<label class="checkbox-label">
+						<input type="checkbox" id="excludeAds">
+						<span class="checkmark"></span>
+						Ignore advertising content
+					</label>
+					<p class="setting-description">Try to ignore changes in advertising areas (experimental)</p>
+				</div>
+
+				<div class="setting-item">
+					<label class="checkbox-label">
+						<input type="checkbox" id="ignoreMinorChanges">
+						<span class="checkmark"></span>
+						Ignore minor changes
+					</label>
+					<p class="setting-description">Filter out very small changes like timestamps</p>
+				</div>
+			</section>
+
+			<div class="actions">
+				<button id="saveSettings" class="btn btn-primary">Save Settings</button>
+				<button id="resetSettings" class="btn btn-secondary">Reset to Defaults</button>
+				<button id="clearHistory" class="btn btn-outline">Clear History</button>
+			</div>
+
+			<div id="saveMessage" class="save-message hidden">Settings saved successfully!</div>
+		</main>
+	</div>
+
+	<script src="options.js"></script>
+</body>
+
+</html>

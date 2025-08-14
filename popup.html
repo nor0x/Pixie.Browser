@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pixie.Browser</title>
+	<link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Pixie.Browser</h1>
+			<p class="subtitle">Page Change Detection</p>
+		</header>
+
+		<main>
+			<div class="current-tab">
+				<h3>Current Tab</h3>
+				<div class="tab-info">
+					<div class="tab-title" id="currentTabTitle">Loading...</div>
+					<div class="tab-url" id="currentTabUrl">Loading...</div>
+				</div>
+				<div class="tab-controls">
+					<button id="startMonitoring" class="btn btn-primary">Start Monitoring</button>
+					<button id="stopMonitoring" class="btn btn-secondary hidden">Stop Monitoring</button>
+					<button id="captureNow" class="btn btn-outline">Capture Now</button>
+				</div>
+			</div>
+
+			<div class="monitoring-status">
+				<h3>Monitoring Status</h3>
+				<div class="status-indicator">
+					<span class="status-dot" id="statusDot"></span>
+					<span id="statusText">Not monitoring</span>
+				</div>
+				<div class="monitored-count">
+					<span id="monitoredCount">0</span> tabs being monitored
+				</div>
+			</div>
+
+			<div class="recent-changes">
+				<h3>Recent Changes</h3>
+				<div id="changesList" class="changes-list">
+					<p class="no-changes">No changes detected yet</p>
+				</div>
+			</div>
+
+			<div class="actions">
+				<button id="openOptions" class="btn btn-link">Settings</button>
+				<button id="viewHistory" class="btn btn-link">View History</button>
+			</div>
+		</main>
+	</div>
+
+	<script src="popup.js"></script>
+</body>
+
+</html>

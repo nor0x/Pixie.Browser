@@ -1,0 +1,218 @@
+/* Pixie.Browser Popup Styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	width: 350px;
+	min-height: 400px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	font-size: 14px;
+	line-height: 1.4;
+	color: #333;
+	background: #fff;
+}
+
+.container {
+	padding: 16px;
+}
+
+header {
+	text-align: center;
+	margin-bottom: 20px;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+	font-size: 20px;
+	font-weight: 600;
+	color: #2563eb;
+	margin-bottom: 4px;
+}
+
+.subtitle {
+	font-size: 12px;
+	color: #666;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.current-tab h3,
+.monitoring-status h3,
+.recent-changes h3 {
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 8px;
+	color: #374151;
+}
+
+.tab-info {
+	background: #f8fafc;
+	padding: 12px;
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+
+.tab-title {
+	font-weight: 500;
+	margin-bottom: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tab-url {
+	font-size: 12px;
+	color: #6b7280;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tab-controls {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.btn {
+	padding: 8px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 4px;
+	background: white;
+	color: #374151;
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.btn:hover {
+	background: #f9fafb;
+	border-color: #9ca3af;
+}
+
+.btn-primary {
+	background: #2563eb;
+	border-color: #2563eb;
+	color: white;
+}
+
+.btn-primary:hover {
+	background: #1d4ed8;
+	border-color: #1d4ed8;
+}
+
+.btn-secondary {
+	background: #ef4444;
+	border-color: #ef4444;
+	color: white;
+}
+
+.btn-secondary:hover {
+	background: #dc2626;
+	border-color: #dc2626;
+}
+
+.btn-outline {
+	background: transparent;
+	border-color: #2563eb;
+	color: #2563eb;
+}
+
+.btn-outline:hover {
+	background: #2563eb;
+	color: white;
+}
+
+.btn-link {
+	border: none;
+	background: none;
+	color: #2563eb;
+	text-decoration: underline;
+	padding: 4px 0;
+}
+
+.btn-link:hover {
+	color: #1d4ed8;
+	background: none;
+}
+
+.status-indicator {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.status-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #ef4444;
+	transition: background-color 0.2s;
+}
+
+.status-dot.active {
+	background: #10b981;
+}
+
+.monitored-count {
+	font-size: 12px;
+	color: #6b7280;
+}
+
+.changes-list {
+	max-height: 120px;
+	overflow-y: auto;
+}
+
+.change-item {
+	padding: 8px 0;
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.change-item:last-child {
+	border-bottom: none;
+}
+
+.change-title {
+	font-size: 12px;
+	font-weight: 500;
+	margin-bottom: 2px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.change-time {
+	font-size: 11px;
+	color: #9ca3af;
+}
+
+.no-changes {
+	text-align: center;
+	color: #9ca3af;
+	font-size: 12px;
+	padding: 16px 0;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 16px;
+	border-top: 1px solid #e5e7eb;
+}
+
+.hidden {
+	display: none !important;
+}
