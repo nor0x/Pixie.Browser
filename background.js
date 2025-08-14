@@ -3,19 +3,25 @@ class PixieBackground {
 	constructor() {
 		this.snapshots = new Map();
 		this.monitoredTabs = new Set();
+		this.checkTimer = null;
+		this.actualCheckInterval = 5; // Default 5 minutes
 		this.init();
 	}
 
 	init() {
 		// Set up alarm for periodic checks
-		chrome.runtime.onInstalled.addListener(() => {
-			chrome.alarms.create('pixieCheck', { periodInMinutes: 5 });
+		chrome.runtime.onInstalled.addListener(async () => {
+			await this.loadSettings();
+			// Chrome alarms minimum is 1 minute, so use that for sub-minute intervals
+			const alarmInterval = Math.max(1, this.actualCheckInterval);
+			chrome.alarms.create('pixieCheck', { periodInMinutes: alarmInterval });
+			this.setupIntervalTimer();
 		});
 
 		// Listen for alarm events
 		chrome.alarms.onAlarm.addListener((alarm) => {
 			if (alarm.name === 'pixieCheck') {
-				this.checkAllMonitoredTabs();
+				this.handleAlarmCheck();
 			}
 		});
 
@@ -31,6 +37,9 @@ class PixieBackground {
 			this.handleMessage(request, sender, sendResponse);
 			return true; // Keep message channel open for async response
 		});
+
+		// Load settings on startup
+		this.loadSettings();
 	}
 
 	async handleMessage(request, sender, sendResponse) {
@@ -50,6 +59,45 @@ class PixieBackground {
 				await this.captureTabSnapshot(request.tabId);
 				sendResponse({ success: true });
 				break;
+			case 'updateSettings':
+				await this.loadSettings();
+				this.setupIntervalTimer();
+				sendResponse({ success: true });
+				break;
+		}
+	}
+
+	async loadSettings() {
+		try {
+			const { actualCheckInterval } = await chrome.storage.local.get('actualCheckInterval');
+			if (actualCheckInterval !== undefined) {
+				this.actualCheckInterval = actualCheckInterval;
+			}
+		} catch (error) {
+			console.error('Error loading settings:', error);
+		}
+	}
+
+	setupIntervalTimer() {
+		// Clear existing timer
+		if (this.checkTimer) {
+			clearInterval(this.checkTimer);
+		}
+
+		// If interval is less than 1 minute, use setInterval for more frequent checks
+		if (this.actualCheckInterval < 1) {
+			const intervalMs = this.actualCheckInterval * 60 * 1000; // Convert minutes to milliseconds
+			this.checkTimer = setInterval(() => {
+				this.checkAllMonitoredTabs();
+			}, intervalMs);
+		}
+	}
+
+	handleAlarmCheck() {
+		// If interval is 1 minute or more, handle normally
+		// If less than 1 minute, the setInterval timer handles it
+		if (this.actualCheckInterval >= 1) {
+			this.checkAllMonitoredTabs();
 		}
 	}
 

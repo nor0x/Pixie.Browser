@@ -68,7 +68,7 @@ class PixieOptions {
 	async saveSettings(showMessage = true) {
 		try {
 			const settings = {
-				checkInterval: parseInt(document.getElementById('checkInterval').value),
+				checkInterval: parseFloat(document.getElementById('checkInterval').value),
 				sensitivity: document.getElementById('sensitivity').value,
 				enableNotifications: document.getElementById('enableNotifications').checked,
 				enableSound: document.getElementById('enableSound').checked,
@@ -82,6 +82,9 @@ class PixieOptions {
 
 			// Update alarm interval if changed
 			await this.updateAlarmInterval(settings.checkInterval);
+
+			// Notify background script of settings change
+			chrome.runtime.sendMessage({ action: 'updateSettings' });
 
 			if (showMessage) {
 				this.showSaveMessage();
@@ -97,8 +100,16 @@ class PixieOptions {
 			// Clear existing alarm
 			await chrome.alarms.clear('pixieCheck');
 
+			// Chrome alarms have a minimum period of 1 minute
+			// For intervals less than 1 minute, we'll set a 1-minute alarm
+			// and handle the sub-minute timing in the background script
+			const alarmInterval = Math.max(1, minutes);
+
 			// Create new alarm with updated interval
-			await chrome.alarms.create('pixieCheck', { periodInMinutes: minutes });
+			await chrome.alarms.create('pixieCheck', { periodInMinutes: alarmInterval });
+
+			// Store the actual desired interval for background script to use
+			await chrome.storage.local.set({ actualCheckInterval: minutes });
 
 		} catch (error) {
 			console.error('Error updating alarm interval:', error);
